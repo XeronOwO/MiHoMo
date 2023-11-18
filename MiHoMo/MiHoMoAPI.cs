@@ -83,7 +83,7 @@ namespace MiHoMo
 		/// <returns>从网络获取资源作为流任务</returns>
 		public async Task<Stream> GetResourceAsStreamAsync(string path)
 		{
-			var response = await _httpClient.GetAsync(path);
+			var response = await _httpClient.GetAsync($"{_indexBaseUrl}/{path}");
 			response.EnsureSuccessStatusCode();
 			return await response.Content.ReadAsStreamAsync();
 		}
@@ -95,26 +95,17 @@ namespace MiHoMo
 		/// <returns>从网络获取资源作为字节数组任务</returns>
 		public async Task<byte[]> GetResourceAsByteArrayAsync(string path)
 		{
-			var response = await _httpClient.GetAsync(path);
+			var response = await _httpClient.GetAsync($"{_indexBaseUrl}/{path}");
 			response.EnsureSuccessStatusCode();
 			return await response.Content.ReadAsByteArrayAsync();
 		}
 
-		/// <summary>
-		/// 从网络获取资源作为字符串
-		/// </summary>
-		/// <param name="path">资源路径<br/>例如：icon/element/Physical.png</param>
-		/// <returns>从网络获取资源作为字符串任务</returns>
-		public async Task<string> GetResourceAsStringAsync(string path)
-		{
-			var response = await _httpClient.GetAsync(path);
-			response.EnsureSuccessStatusCode();
-			return await response.Content.ReadAsStringAsync();
-		}
-
 		private async Task<T> GetDataFromUrlAsync<T>(string url)
 		{
-			return JsonConvert.DeserializeObject<T>(await GetResourceAsStringAsync(url));
+			var response = await _httpClient.GetAsync(url);
+			response.EnsureSuccessStatusCode();
+			var content =  await response.Content.ReadAsStringAsync();
+			return JsonConvert.DeserializeObject<T>(content);
 		}
 
 		#endregion
