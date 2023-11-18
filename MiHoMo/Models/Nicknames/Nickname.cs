@@ -11,7 +11,7 @@ namespace MiHoMo.Models.Nicknames
 		/// 角色昵称表
 		/// </summary>
 		[JsonProperty("characters")]
-		public NicknameCharacterList Characters { get; set; }
+		public NicknameCharacter Characters { get; set; }
 
 		/// <summary>
 		/// 遗器昵称表
