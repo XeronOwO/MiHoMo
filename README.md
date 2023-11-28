@@ -24,7 +24,7 @@ namespace Test
         {
             using var api = new MiHoMoAPI(); // Create MiHoMo API
             await api.InitAllResourcesAsync(); // Initialize all resources
-            // var originInfo = await api.GetOriginInfoAsync(102176371);
+            // var originInfo = await api.GetOriginInfoAsync(100000000);
             var parsedInfo = await api.GetParsedInfoAsync(100000000); // Get parsed info by UID
 
             // TODO ...
