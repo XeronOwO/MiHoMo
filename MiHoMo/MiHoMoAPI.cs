@@ -1,4 +1,5 @@
-﻿using MiHoMo.Models.Achievements;
+﻿using MiHoMo.Models;
+using MiHoMo.Models.Achievements;
 using MiHoMo.Models.Avatars;
 using MiHoMo.Models.CharacterPromotions;
 using MiHoMo.Models.CharacterRanks;
@@ -544,6 +545,24 @@ namespace MiHoMo
 
 		#endregion
 
+		#region API信息
+
+		/// <summary>
+		/// API信息
+		/// </summary>
+		public APIInfo APIInfo { get; private set; } = null;
+
+		/// <summary>
+		/// 初始化API信息
+		/// </summary>
+		/// <returns>任务</returns>
+		public async Task InitAPIInfoAsync()
+		{
+			APIInfo = await GetDataFromUrlAsync<APIInfo>($"{_indexBaseUrl}/info.json");
+		}
+
+		#endregion
+
 		/// <summary>
 		/// 初始化所有资源，包括成就、头像、角色晋阶等<br/>当然，你也可以根据需要选择性地初始化，从而使加载更快
 		/// </summary>
@@ -574,6 +593,7 @@ namespace MiHoMo
 			await InitSimulatedBlockMapAsync();
 			await InitSimulatedCurioMapAsync();
 			await InitSimulatedEventMapAsync();
+			await InitAPIInfoAsync();
 		}
 
 		#endregion
