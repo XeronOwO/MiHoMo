@@ -47,7 +47,7 @@ namespace MiHoMo.Models.Characters
 		/// 能量上限
 		/// </summary>
 		[JsonProperty("max_sp")]
-		public string MaxSP { get; set; }
+		public int MaxSP { get; set; }
 
 		/// <summary>
 		/// 星魂
